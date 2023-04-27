@@ -1,20 +1,8 @@
 import Head from 'next/head';
-import Layout, { siteTitle } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
 import { getSortedPostsData } from '../lib/posts';
+import Layout, { siteTitle } from '../components/layout';
 // import axios from 'axios';
-
-export async function getStaticProps() {
-  const allPostsData = getSortedPostsData();
-  // const res = await fetch('https://jsonplaceholder.typicode.com/users');
-  // const data = await res.json();
-  // console.log(data);
-  return {
-    props: {
-      allPostsData,
-    },
-  };
-}
 
 export default function Home({ allPostsData }) {
   // axios
@@ -48,4 +36,16 @@ export default function Home({ allPostsData }) {
       </section>
     </Layout>
   );
+}
+
+export async function getStaticProps() {
+  const allPostsData = getSortedPostsData();
+  // const res = await fetch('https://jsonplaceholder.typicode.com/users');
+  // const data = await res.json();
+  // console.log(data);
+  return {
+    props: {
+      allPostsData,
+    },
+  };
 }
