@@ -1,7 +1,9 @@
 import Head from 'next/head';
-import utilStyles from '../styles/utils.module.css';
+import { useRouter } from 'next/router';
 import { getSortedPostsData } from '../lib/posts';
+import Date from '../components/date';
 import Layout, { siteTitle } from '../components/layout';
+import utilStyles from '../styles/utils.module.css';
 // import axios from 'axios';
 
 export default function Home({ allPostsData }) {
@@ -15,21 +17,29 @@ export default function Home({ allPostsData }) {
   //   .catch((error) => {
   //     console.log(error);
   //   });
+  const router = useRouter();
+
+  const routerPost = (id) => {
+    router.push({
+      pathname: `/posts/${id}`,
+    });
+  };
+
   return (
     <Layout home>
-      {/* Keep the existing code here */}
-
-      {/* Add this <section> tag below the existing <section> tag */}
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Blog</h2>
         <ul className={utilStyles.list}>
           {allPostsData.map(({ id, date, title }) => (
             <li className={utilStyles.listItem} key={id}>
-              {title}
-              <br />
-              {id}
-              <br />
-              {date}
+              <div>
+                <a className={utilStyles.cursor} onClick={() => routerPost(id)}>
+                  {title}
+                </a>
+              </div>
+              <small className={utilStyles.lightText}>
+                <Date dateString={date} />
+              </small>
             </li>
           ))}
         </ul>
@@ -40,9 +50,6 @@ export default function Home({ allPostsData }) {
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
-  // const res = await fetch('https://jsonplaceholder.typicode.com/users');
-  // const data = await res.json();
-  // console.log(data);
   return {
     props: {
       allPostsData,
