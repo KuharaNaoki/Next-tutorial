@@ -16,6 +16,8 @@
     "remark-html": "^15.0.2"
   },
   "devDependencies": {
+    "@types/node": "18.16.2",
+    "@types/react": "18.2.0",
     "typescript": "^5.0.4"
   }
 }

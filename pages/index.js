@@ -4,19 +4,8 @@ import { getSortedPostsData } from '../lib/posts';
 import Date from '../components/date';
 import Layout, { siteTitle } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
-// import axios from 'axios';
 
 export default function Home({ allPostsData }) {
-  // axios
-  //   .get('https://jsonplaceholder.typicode.com/posts')
-  //   .then((response) => {
-  //     console.log('response', response.json());
-  //     console.log('response', response.data);
-  //     console.log('allPostsData', allPostsData);
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   });
   const router = useRouter();
 
   const routerPost = (id) => {
