@@ -1,16 +1,23 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { getSortedPostsData } from '../lib/posts';
+import { getAllUserData } from '../lib/users';
 import Date from '../components/date';
-import Layout, { siteTitle } from '../components/layout';
+import Layout from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
 
-export default function Home({ allPostsData }) {
+export default function Home({ allPostsData, allUsersData }) {
   const router = useRouter();
 
   const routerPost = (id) => {
     router.push({
       pathname: `/posts/${id}`,
+    });
+  };
+
+  const routerUser = (id) => {
+    router.push({
+      pathname: `/users/${id}`,
     });
   };
 
@@ -32,6 +39,22 @@ export default function Home({ allPostsData }) {
             </li>
           ))}
         </ul>
+
+        <h2 className={utilStyles.headingLg}>User List</h2>
+        <div className={utilStyles.list}>
+          {allUsersData.map((user) => {
+            return (
+              <div key={user.id}>
+                <a
+                  onClick={() => routerUser(user.id)}
+                  className={utilStyles.cursor}
+                >
+                  {user.name}
+                </a>
+              </div>
+            );
+          })}
+        </div>
       </section>
     </Layout>
   );
@@ -39,9 +62,12 @@ export default function Home({ allPostsData }) {
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
+  const allUsersData = await getAllUserData();
+  console.log('allUsersData', allUsersData);
   return {
     props: {
       allPostsData,
+      allUsersData,
     },
   };
 }

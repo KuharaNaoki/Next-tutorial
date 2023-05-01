@@ -20,6 +20,24 @@ export async function getUserIds() {
   });
 }
 
+export async function getAllUserData(id: string) {
+  const getUserData = await axios
+    .get('https://jsonplaceholder.typicode.com/users')
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+  return getUserData.map((user: userType) => {
+    return {
+      id: user.id.toString(),
+      name: user.name.toString(),
+    };
+  });
+}
+
 export async function getUserData(id: string) {
   const getUserData = await axios
     .get('https://jsonplaceholder.typicode.com/users')
