@@ -18,7 +18,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "lib/users.js",
+    "lib/users.ts",
     "pages/users/[id].js"
   ],
   "exclude": ["node_modules"]
