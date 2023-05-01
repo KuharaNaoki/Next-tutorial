@@ -1,9 +1,5 @@
 import axios from 'axios';
-
-type userType = {
-  id: string;
-  name: string;
-};
+import { userType } from '../types/user';
 
 export async function getUserIds() {
   const getUserData = await axios
@@ -18,13 +14,13 @@ export async function getUserIds() {
   return getUserData.map((user: userType) => {
     return {
       params: {
-        id: user.id,
+        id: user.id.toString(),
       },
     };
   });
 }
 
-export async function getUserData() {
+export async function getUserData(id: string) {
   const getUserData = await axios
     .get('https://jsonplaceholder.typicode.com/users')
     .then((response) => {
@@ -34,10 +30,13 @@ export async function getUserData() {
       console.log(error);
     });
 
-  return getUserData.map((user: userType) => {
-    return {
-      id: user.id,
-      name: user.name,
-    };
-  });
+  return getUserData
+    .filter((user: userType) => user.id == id)
+    .map((user: userType) => {
+      return {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+      };
+    });
 }

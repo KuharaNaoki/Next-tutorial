@@ -1,11 +1,10 @@
 import Head from 'next/head';
-import { getUserData } from '../../lib/users';
 import { getAllPostIds, getPostData } from '../../lib/posts';
 import Date from '../../components/date';
 import Layout from '../../components/layout';
 import utilStyles from '../../styles/utils.module.css';
 
-export default function Post({ postData, userData }) {
+export default function Post({ postData }) {
   return (
     <Layout>
       <Head>
@@ -18,14 +17,6 @@ export default function Post({ postData, userData }) {
         </div>
         <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
       </article>
-      <div>------------------------ APIを使用 ----------------------------</div>
-      <div>
-        {userData.map((user) => (
-          <div key={user.id}>
-            {user.id} : {user.name}
-          </div>
-        ))}
-      </div>
     </Layout>
   );
 }
@@ -40,11 +31,9 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const postData = await getPostData(params.id);
-  const userData = await getUserData();
   return {
     props: {
       postData,
-      userData,
     },
   };
 }
