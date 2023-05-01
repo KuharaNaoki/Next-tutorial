@@ -20,7 +20,7 @@ export async function getUserIds() {
   });
 }
 
-export async function getAllUserData(id: string) {
+export async function getAllUserData() {
   const getUserData = await axios
     .get('https://jsonplaceholder.typicode.com/users')
     .then((response) => {
