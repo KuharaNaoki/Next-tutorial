@@ -40,6 +40,7 @@ export default function Home({ allPostsData, allUsersData }) {
           ))}
         </ul>
 
+        <br />
         <h2 className={utilStyles.headingLg}>User List</h2>
         <div className={utilStyles.list}>
           {allUsersData.map((user) => {

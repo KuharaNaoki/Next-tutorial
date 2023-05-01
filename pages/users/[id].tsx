@@ -1,5 +1,6 @@
-import { getUserData, getUserIds } from '../../lib/users';
 import { pathType, userType } from '../../types/user';
+import { getUserData, getUserIds } from '../../lib/users';
+import Layout from '../../components/layout';
 
 export default function PostUser({ userData }) {
   const usersData = userData.map((user: userType) => {
@@ -12,10 +13,13 @@ export default function PostUser({ userData }) {
   });
 
   return (
-    <>
-      <div>------------------------ APIを使用 ----------------------------</div>
+    <Layout home={false}>
+      <div>
+        ------------------------ APIよりユーザーデータを取得
+        ------------------------
+      </div>
       <div>{usersData}</div>
-    </>
+    </Layout>
   );
 }
 
