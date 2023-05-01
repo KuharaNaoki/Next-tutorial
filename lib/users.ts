@@ -55,6 +55,10 @@ export async function getUserData(id: string) {
         id: user.id,
         name: user.name,
         email: user.email,
+        phone: user.phone,
+        company: {
+          name: user.company.name,
+        },
       };
     });
 }

@@ -1,7 +1,11 @@
 export type userType = {
-  email: string;
   id: string;
   name: string;
+  email: string;
+  phone: string;
+  company: {
+    name: string;
+  };
 };
 
 export type pathType = {

@@ -19,7 +19,8 @@
     "**/*.ts",
     "**/*.tsx",
     "lib/users.ts",
-    "pages/users/[id].js"
+    "pages/users/[id].js",
+    "components/date.js"
   ],
   "exclude": ["node_modules"]
 }

@@ -8,6 +8,8 @@ export default function PostUser({ userData }) {
       <div key={user.id}>
         <div>full name : {user.name}</div>
         <div>email : {user.email}</div>
+        <div>phone : {user.phone}</div>
+        <div>company : {user.company.name}</div>
       </div>
     );
   });
