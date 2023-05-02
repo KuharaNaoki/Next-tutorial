@@ -1,21 +1,27 @@
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { getSortedPostsData } from '../lib/posts';
 import { getAllUserData } from '../lib/users';
+import { UserArrayType } from '../types/user';
+import { PostArrayType } from '../types/post';
 import Date from '../components/date';
 import Layout from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
 
-export default function Home({ allPostsData, allUsersData }) {
+type Props = {
+  allPostsData: PostArrayType;
+  allUsersData: UserArrayType;
+};
+
+export default function Home({ allPostsData, allUsersData }: Props) {
   const router = useRouter();
 
-  const routerPost = (id) => {
+  const routerPost = (id: string) => {
     router.push({
       pathname: `/posts/${id}`,
     });
   };
 
-  const routerUser = (id) => {
+  const routerUser = (id: string) => {
     router.push({
       pathname: `/users/${id}`,
     });
@@ -64,7 +70,6 @@ export default function Home({ allPostsData, allUsersData }) {
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
   const allUsersData = await getAllUserData();
-  console.log('allUsersData', allUsersData);
   return {
     props: {
       allPostsData,

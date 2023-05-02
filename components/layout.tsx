@@ -8,7 +8,12 @@ import styles from './layout.module.css';
 const name = 'Naoki Kuhara';
 export const siteTitle = 'Next.js Sample Website';
 
-export default function Layout({ children, home }) {
+type Props = {
+  children: React.ReactNode;
+  home: boolean;
+};
+
+export default function Layout({ children, home }: Props) {
   const router = useRouter();
 
   const routerFirstPost = () => {

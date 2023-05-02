@@ -1,15 +1,15 @@
-export type userType = {
+export type UserArrayType = {
   id: string;
   name: string;
-  email: string;
-  phone: string;
-  company: {
+  email?: string;
+  phone?: string;
+  company?: {
     name: string;
   };
-};
+}[];
 
-export type pathType = {
+export type PathType = {
   params: {
     id: string;
   };
-};
+}[];

@@ -1,9 +1,13 @@
-import { pathType, userType } from '../../types/user';
 import { getUserData, getUserIds } from '../../lib/users';
+import { PathType, UserArrayType } from '../../types/user';
 import Layout from '../../components/layout';
 
-export default function PostUser({ userData }) {
-  const usersData = userData.map((user: userType) => {
+type Props = {
+  userData: UserArrayType;
+};
+
+export default function PostUser({ userData }: Props) {
+  const usersData = userData.map((user) => {
     return (
       <div key={user.id}>
         <div>full name : {user.name}</div>
@@ -26,7 +30,7 @@ export default function PostUser({ userData }) {
 }
 
 export async function getStaticPaths() {
-  const paths: pathType[] = await getUserIds();
+  const paths: PathType = await getUserIds();
   return {
     paths,
     fallback: false,
@@ -34,7 +38,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const userData: userType = await getUserData(params.id);
+  const userData = await getUserData(params.id);
   return {
     props: {
       userData,

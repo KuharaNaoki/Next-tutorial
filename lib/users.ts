@@ -1,17 +1,10 @@
-import axios from 'axios';
-import { userType } from '../types/user';
+import { getUserDataAsync } from './api';
+import { UserArrayType } from '../types/user';
 
 export async function getUserIds() {
-  const getUserData = await axios
-    .get('https://jsonplaceholder.typicode.com/users')
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  const getUserData: UserArrayType = await getUserDataAsync();
 
-  return getUserData.map((user: userType) => {
+  return getUserData.map((user) => {
     return {
       params: {
         id: user.id.toString(),
@@ -21,16 +14,9 @@ export async function getUserIds() {
 }
 
 export async function getAllUserData() {
-  const getUserData = await axios
-    .get('https://jsonplaceholder.typicode.com/users')
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  const getUserData: UserArrayType = await getUserDataAsync();
 
-  return getUserData.map((user: userType) => {
+  return getUserData.map((user) => {
     return {
       id: user.id.toString(),
       name: user.name.toString(),
@@ -39,18 +25,11 @@ export async function getAllUserData() {
 }
 
 export async function getUserData(id: string) {
-  const getUserData = await axios
-    .get('https://jsonplaceholder.typicode.com/users')
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  const getUserData: UserArrayType = await getUserDataAsync();
 
   return getUserData
-    .filter((user: userType) => user.id == id)
-    .map((user: userType) => {
+    .filter((user) => user.id == id)
+    .map((user) => {
       return {
         id: user.id,
         name: user.name,
