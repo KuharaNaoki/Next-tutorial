@@ -1,5 +1,5 @@
 import { getUserData, getUserIds } from '../../lib/users';
-import { PathType, UserArrayType } from '../../types/user';
+import { PathType, UserArrayType } from '../../types/userType';
 import Layout from '../../components/layout';
 
 type Props = {

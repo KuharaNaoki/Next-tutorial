@@ -1,5 +1,5 @@
 import { getUserDataAsync } from './api';
-import { UserArrayType } from '../types/user';
+import { UserArrayType } from '../types/userType';
 
 export async function getUserIds() {
   const getUserData: UserArrayType = await getUserDataAsync();
@@ -28,7 +28,7 @@ export async function getUserData(id: string) {
   const getUserData: UserArrayType = await getUserDataAsync();
 
   return getUserData
-    .filter((user) => user.id == id)
+    .filter((user) => user.id.toString() === id)
     .map((user) => {
       return {
         id: user.id,

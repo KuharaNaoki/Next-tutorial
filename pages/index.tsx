@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 import { getSortedPostsData } from '../lib/posts';
 import { getAllUserData } from '../lib/users';
-import { UserArrayType } from '../types/user';
-import { PostArrayType } from '../types/post';
+import { UserArrayType } from '../types/userType';
+import { PostArrayType } from '../types/postType';
 import Date from '../components/date';
 import Layout from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
