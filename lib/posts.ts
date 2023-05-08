@@ -3,15 +3,11 @@ import path from 'path';
 import html from 'remark-html';
 import { remark } from 'remark';
 import matter from 'gray-matter';
+import { PostArrayType } from '../types/postType';
 
 const postsDirectory = path.join(process.cwd(), 'posts');
 
-type PostType = {
-  id: string;
-  date: string;
-}[];
-
-export function getSortedPostsData(): PostType {
+export const getSortedPostsData = (): PostArrayType => {
   // Get file names under /posts
   const fileNames = fs.readdirSync(postsDirectory);
   const allPostsData = fileNames.map((fileName) => {
@@ -39,9 +35,9 @@ export function getSortedPostsData(): PostType {
       return -1;
     }
   });
-}
+};
 
-export function getAllPostIds() {
+export const getAllPostIds = () => {
   const fileNames = fs.readdirSync(postsDirectory);
 
   return fileNames.map((fileName) => {
@@ -51,9 +47,9 @@ export function getAllPostIds() {
       },
     };
   });
-}
+};
 
-export async function getPostData(id: string) {
+export const getPostData = async (id: string) => {
   const fullPath = path.join(postsDirectory, `${id}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
@@ -72,4 +68,4 @@ export async function getPostData(id: string) {
     contentHtml,
     ...matterResult.data,
   };
-}
+};

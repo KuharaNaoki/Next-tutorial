@@ -1,7 +1,7 @@
 import { getUserDataAsync } from './api';
 import { UserArrayType } from '../types/userType';
 
-export async function getUserIds() {
+export const getUserIds = async () => {
   const getUserData: UserArrayType = await getUserDataAsync();
 
   return getUserData.map((user) => {
@@ -11,9 +11,9 @@ export async function getUserIds() {
       },
     };
   });
-}
+};
 
-export async function getAllUserData() {
+export const getAllUserData = async () => {
   const getUserData: UserArrayType = await getUserDataAsync();
 
   return getUserData.map((user) => {
@@ -22,9 +22,9 @@ export async function getAllUserData() {
       name: user.name.toString(),
     };
   });
-}
+};
 
-export async function getUserData(id: string) {
+export const getUserData = async (id: string) => {
   const getUserData: UserArrayType = await getUserDataAsync();
 
   return getUserData
@@ -40,4 +40,4 @@ export async function getUserData(id: string) {
         },
       };
     });
-}
+};

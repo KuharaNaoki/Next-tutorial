@@ -13,7 +13,7 @@ type Props = {
   home: boolean;
 };
 
-export default function Layout({ children, home }: Props) {
+export const Layout = ({ children, home }: Props) => {
   const router = useRouter();
 
   const routerFirstPost = () => {
@@ -93,4 +93,4 @@ export default function Layout({ children, home }: Props) {
       )}
     </div>
   );
-}
+};

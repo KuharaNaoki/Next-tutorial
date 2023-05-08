@@ -3,8 +3,8 @@ import { getSortedPostsData } from '../lib/posts';
 import { getAllUserData } from '../lib/users';
 import { UserArrayType } from '../types/userType';
 import { PostArrayType } from '../types/postType';
-import Date from '../components/date';
-import Layout from '../components/layout';
+import { Date } from '../components/date';
+import { Layout } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
 
 type Props = {
@@ -67,7 +67,7 @@ export default function Home({ allPostsData, allUsersData }: Props) {
   );
 }
 
-export async function getStaticProps() {
+export const getStaticProps = async () => {
   const allPostsData = getSortedPostsData();
   const allUsersData = await getAllUserData();
   return {
@@ -76,4 +76,4 @@ export async function getStaticProps() {
       allUsersData,
     },
   };
-}
+};

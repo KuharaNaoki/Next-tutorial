@@ -1,6 +1,6 @@
 import { getUserData, getUserIds } from '../../lib/users';
 import { PathType, UserArrayType } from '../../types/userType';
-import Layout from '../../components/layout';
+import { Layout } from '../../components/layout';
 
 type Props = {
   userData: UserArrayType;
@@ -29,19 +29,19 @@ export default function PostUser({ userData }: Props) {
   );
 }
 
-export async function getStaticPaths() {
+export const getStaticPaths = async () => {
   const paths: PathType = await getUserIds();
   return {
     paths,
     fallback: false,
   };
-}
+};
 
-export async function getStaticProps({ params }) {
+export const getStaticProps = async ({ params }) => {
   const userData = await getUserData(params.id);
   return {
     props: {
       userData,
     },
   };
-}
+};

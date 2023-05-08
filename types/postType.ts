@@ -1,8 +1,8 @@
 export type PostArrayType = {
   id: string;
-  title: string;
+  title?: string;
   date: string;
-  contentHtml: string;
+  contentHtml?: string;
 }[];
 
 export type PostType = {

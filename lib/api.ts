@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export async function getUserDataAsync() {
+export const getUserDataAsync = async () => {
   try {
     const response = await axios.get(
       'https://jsonplaceholder.typicode.com/users'
@@ -9,4 +9,4 @@ export async function getUserDataAsync() {
   } catch (error) {
     console.log(error);
   }
-}
+};
