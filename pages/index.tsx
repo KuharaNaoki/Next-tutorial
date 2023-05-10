@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import { fetchAwsKuharaStudyBackend } from '../lib/api';
 import { getSortedPostsData } from '../lib/posts';
 import { getAllUserData } from '../lib/users';
 import { UserArrayType } from '../types/userType';
@@ -10,9 +11,14 @@ import utilStyles from '../styles/utils.module.css';
 type Props = {
   allPostsData: PostArrayType;
   allUsersData: UserArrayType;
+  awsKuharaStudyBackend: { statusCode: string; body: string };
 };
 
-export default function Home({ allPostsData, allUsersData }: Props) {
+export default function Home({
+  allPostsData,
+  allUsersData,
+  awsKuharaStudyBackend,
+}: Props) {
   const router = useRouter();
 
   const routerPost = (id: string) => {
@@ -62,6 +68,13 @@ export default function Home({ allPostsData, allUsersData }: Props) {
             );
           })}
         </div>
+
+        <br />
+        <h2 className={utilStyles.headingLg}>APIゲートウェイからの呼び出し</h2>
+        <div>
+          <div>StatusCode : {awsKuharaStudyBackend.statusCode}</div>
+          <div>Message : {awsKuharaStudyBackend.body}</div>
+        </div>
       </section>
     </Layout>
   );
@@ -70,10 +83,12 @@ export default function Home({ allPostsData, allUsersData }: Props) {
 export const getStaticProps = async () => {
   const allPostsData = getSortedPostsData();
   const allUsersData = await getAllUserData();
+  const awsKuharaStudyBackend = await fetchAwsKuharaStudyBackend();
   return {
     props: {
       allPostsData,
       allUsersData,
+      awsKuharaStudyBackend,
     },
   };
 };
