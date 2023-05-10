@@ -1,5 +1,10 @@
 import { useRouter } from 'next/router';
-import { fetchAwsKuharaStudyBackend } from '../lib/api';
+import { useState } from 'react';
+// import axios from 'axios';
+import {
+  fetchAwsKuharaStudyBackend,
+  postAwsKuharaStudyBackend,
+} from '../lib/api';
 import { getSortedPostsData } from '../lib/posts';
 import { getAllUserData } from '../lib/users';
 import { UserArrayType } from '../types/userType';
@@ -12,13 +17,16 @@ type Props = {
   allPostsData: PostArrayType;
   allUsersData: UserArrayType;
   awsKuharaStudyBackend: { statusCode: string; body: string };
+  postKuharaStudyBackend: { statusCode: string; body: string };
 };
 
 export default function Home({
   allPostsData,
   allUsersData,
   awsKuharaStudyBackend,
+  postKuharaStudyBackend,
 }: Props) {
+  const [name, setName] = useState('aaaaa');
   const router = useRouter();
 
   const routerPost = (id: string) => {
@@ -32,6 +40,32 @@ export default function Home({
       pathname: `/users/${id}`,
     });
   };
+
+  // const postName = async (name: string) => {
+  //   console.log(await postAwsKuharaStudyBackend());
+  // };
+
+  // // const getName = async () => {
+  // //   console.log(await fetchAwsKuharaStudyBackend());
+  // // };
+  // const getName = async () => {
+  //   const config = {
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Access-Control-Allow-Origin': '*',
+  //     },
+  //   };
+
+  //   try {
+  //     const response = await axios.get(
+  //       'https://ahtwt332h2.execute-api.ap-northeast-1.amazonaws.com/kuhara-study-backend',
+  //       config
+  //     );
+  //     setName(JSON.parse(response.data.name));
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <Layout home>
@@ -70,11 +104,26 @@ export default function Home({
         </div>
 
         <br />
-        <h2 className={utilStyles.headingLg}>APIゲートウェイからの呼び出し</h2>
+        <h2 className={utilStyles.headingLg}>
+          APIゲートウェイからの呼び出し(GET)
+        </h2>
         <div>
           <div>StatusCode : {awsKuharaStudyBackend.statusCode}</div>
           <div>Message : {awsKuharaStudyBackend.body}</div>
         </div>
+
+        <br />
+        <h2 className={utilStyles.headingLg}>
+          APIゲートウェイからの呼び出し(POST)
+        </h2>
+        <div>
+          <div>StatusCode : {postKuharaStudyBackend.statusCode}</div>
+          <div>Message : {postKuharaStudyBackend.body}</div>
+        </div>
+
+        {/* <div onClick={() => postName('kuhara')}>POSTクリックして！</div>
+        <div onClick={() => getName()}>GETクリックして！</div> */}
+        <div>{name}</div>
       </section>
     </Layout>
   );
@@ -84,11 +133,13 @@ export const getStaticProps = async () => {
   const allPostsData = getSortedPostsData();
   const allUsersData = await getAllUserData();
   const awsKuharaStudyBackend = await fetchAwsKuharaStudyBackend();
+  const postKuharaStudyBackend = await postAwsKuharaStudyBackend();
   return {
     props: {
       allPostsData,
       allUsersData,
       awsKuharaStudyBackend,
+      postKuharaStudyBackend,
     },
   };
 };
