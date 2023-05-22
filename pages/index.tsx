@@ -1,10 +1,5 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-// import axios from 'axios';
-import {
-  fetchAwsKuharaStudyBackend,
-  postAwsKuharaStudyBackend,
-} from '../lib/api';
 import { getSortedPostsData } from '../lib/posts';
 import { getAllUserData } from '../lib/users';
 import { UserArrayType } from '../types/userType';
@@ -16,16 +11,9 @@ import utilStyles from '../styles/utils.module.css';
 type Props = {
   allPostsData: PostArrayType;
   allUsersData: UserArrayType;
-  awsKuharaStudyBackend: { statusCode: string; body: string };
-  postKuharaStudyBackend: { statusCode: string; body: string };
 };
 
-export default function Home({
-  allPostsData,
-  allUsersData,
-  awsKuharaStudyBackend,
-  postKuharaStudyBackend,
-}: Props) {
+export default function Home({ allPostsData, allUsersData }: Props) {
   const [name, setName] = useState('aaaaa');
   const router = useRouter();
 
@@ -107,19 +95,13 @@ export default function Home({
         <h2 className={utilStyles.headingLg}>
           APIゲートウェイからの呼び出し(GET)
         </h2>
-        <div>
-          <div>StatusCode : {awsKuharaStudyBackend.statusCode}</div>
-          <div>Message : {awsKuharaStudyBackend.body}</div>
-        </div>
+        <div></div>
 
         <br />
         <h2 className={utilStyles.headingLg}>
           APIゲートウェイからの呼び出し(POST)
         </h2>
-        <div>
-          <div>StatusCode : {postKuharaStudyBackend.statusCode}</div>
-          <div>Message : {postKuharaStudyBackend.body}</div>
-        </div>
+        <div></div>
 
         {/* <div onClick={() => postName('kuhara')}>POSTクリックして！</div>
         <div onClick={() => getName()}>GETクリックして！</div> */}
@@ -132,14 +114,10 @@ export default function Home({
 export const getStaticProps = async () => {
   const allPostsData = getSortedPostsData();
   const allUsersData = await getAllUserData();
-  const awsKuharaStudyBackend = await fetchAwsKuharaStudyBackend();
-  const postKuharaStudyBackend = await postAwsKuharaStudyBackend();
   return {
     props: {
       allPostsData,
       allUsersData,
-      awsKuharaStudyBackend,
-      postKuharaStudyBackend,
     },
   };
 };
