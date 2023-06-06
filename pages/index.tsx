@@ -24,6 +24,9 @@ export default function Home({ allPostsData, allUsersData }: Props) {
   const routerUser = (id: string) => {
     router.push({
       pathname: `/users/${id}`,
+      query: {
+        username: 'taro'
+      }
     });
   };
 
